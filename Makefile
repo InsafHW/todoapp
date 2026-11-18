@@ -16,7 +16,7 @@ migrate-create:
 		echo "Parameter seq is missing"; \
 		exit 1; \
 	fi
-	@docker compose run --rm todoapp-postgres-migrate \
+	@docker compose run --rm --user "$$(id -u):$$(id -g)" todoapp-postgres-migrate \
 		create \
 		-ext sql \
 		-dir /migrations \
