@@ -3,13 +3,19 @@ export
 
 export PROJECT_ROOT=$(shell pwd)
 
-.PHONY: env-up env-down migrate-create migrate-action migrate-up migrate-down
+.PHONY: env-up env-down migrate-create migrate-action migrate-up migrate-down env-port-forward-up env-port-forward-close
 
 env-up:
 	@docker compose up -d todoapp-postgres
 
 env-down:
 	@docker compose down todoapp-postgres
+
+env-port-forward-up:
+	@docker compose up -d port-forwarder
+
+env-port-forward-close:
+	@docker compose down port-forwarder
 
 migrate-create:
 	@if [ -z "$(seq)" ]; then \
